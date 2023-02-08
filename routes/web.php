@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/start', function (\Illuminate\Http\Request $request) {
+    \Illuminate\Support\Facades\Log::info('TEST', [$request->all()]);
+    dd(1111);
+})->name('webhook.receive');
