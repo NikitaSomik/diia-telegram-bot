@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Domains\Telegram\Services\BotMenuService;
+use App\Domains\Telegram\Services\BotMenuServiceInterface;
+use BotMan\BotMan\Drivers\DriverManager;
+use BotMan\Drivers\Telegram\TelegramDriver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +15,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        $this->app->bind(BotMenuServiceInterface::class, BotMenuService::class);
     }
 
     /**
@@ -21,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        DriverManager::loadDriver(TelegramDriver::class);
     }
 }
